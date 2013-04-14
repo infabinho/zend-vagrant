@@ -1,0 +1,12 @@
+.idea/
+.DS_Store
+nbproject
+project/data/cache/*
+project/data/logs/*
+build/
+vendor
+bin
+composer.phar
+composer.lock
+vagrant/.vagrant
+vagrant/BoxConfigurations

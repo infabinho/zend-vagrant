@@ -1,0 +1,16 @@
+{
+    "name": "tonicospinelli/zend-vagrant",
+    "description": "This is a project template which enables you to get Zend1 projects up and running on a Vagrant VM really quickly.",
+    "version": "1.0BETA",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework1": "1.12.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev"
+}

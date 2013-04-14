@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+personalization = File.expand_path("../BoxConfigurations", __FILE__)
+load personalization
+
+Vagrant.configure("2") do |config|
+  config.vm.box = $base_box
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  config.vm.hostname = $vhost + ".dev"
+
+  config.vm.network :forwarded_port, guest: 80, host: 8080      #nginx
+  config.vm.network :forwarded_port, guest: 3306, host: 3306    #mysql
+  config.vm.network :private_network, ip: $ip
+
+  config.vm.synced_folder "../project", "/srv/www/vhosts/" + $vhost + ".dev", :nfs => $use_nfs
+
+  config.vm.provider :virtualbox do |vb|
+    vb.gui = false
+    vb.customize [
+      "modifyvm", :id,
+      "--memory", "512",
+      "--name", $vhost
+    ]
+  end
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet"
+    puppet.manifest_file  = "app.pp"
+    puppet.module_path    = "puppet/modules"
+    puppet.facter         = {
+                              "vhost" => $vhost,
+                              "webserver" => $webserver
+                            }
+  end
+end
