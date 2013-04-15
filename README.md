@@ -8,9 +8,6 @@ projects.
 -   Install vagrant on your system
     see [vagrantup.com](http://vagrantup.com/v1/docs/getting-started/index.html)
 
--   Install vagrant-hostmaster on your system
-    see [mosaicxm/vagrant-hostmaster](https://github.com/mosaicxm/vagrant-hostmaster#installation)
-
 -   Get a base box with puppet support
     see [vagrantup.com docs](http://vagrantup.com/v1/docs/getting-started/boxes.html)
 
@@ -19,11 +16,15 @@ projects.
 
 -   Create a new project from this template:
     ```bash
-        composer create-project tonicospinelli/zend-vagrant <project-path> --stability="beta"
+        composer create-project tonicospinelli/zend-vagrant <project-path> --stability="dev"
+    ```
+-   Remember to include the host and ip in file hosts:
+    ```bash
+        sudo sh -c 'echo "<vm_ip_address> <domain>" >> /etc/hosts'
     ```
 
 -   In your project directory:
-    -   Copy `vagrant/ServerConfiguration.dist` to `vagrant/ServerConfiguration` and modify `vagrant/ServerConfiguration` according to your needs.
+    -   Copy `vagrant/BoxConfiguration.dist` to `vagrant/BoxConfiguration` and modify `vagrant/BoxConfiguration` according to your needs.
 
         Example:
 
