@@ -25,7 +25,7 @@ projects.
     ```
 
 -   In your project directory:
-    -   Copy `vagrant/BoxConfiguration.dist` to `vagrant/BoxConfiguration` and modify `vagrant/BoxConfiguration` according to your needs.
+    -   Copy `vagrant/BoxConfigurations.dist` to `vagrant/BoxConfigurations` and modify `vagrant/BoxConfigurations` according to your needs.
 
         Example:
 
