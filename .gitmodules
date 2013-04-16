@@ -1,9 +1,0 @@
-[submodule "vagrant/puppet/modules/php"]
-	path = vagrant/puppet/modules/php
-	url = git://github.com/Mayflower/puppet-php
-[submodule "vagrant/puppet/modules/pear"]
-	path = vagrant/puppet/modules/pear
-	url = git://github.com/treehouseagency/puppet-pear
-[submodule "vagrant/puppet/modules/phpqatools"]
-	path = vagrant/puppet/modules/phpqatools
-	url = git://github.com/rafaelfelix/puppet-phpqatools
