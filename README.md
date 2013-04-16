@@ -18,9 +18,10 @@ projects.
     ```bash
         composer create-project tonicospinelli/zend-vagrant <project-path> --stability="dev"
     ```
+
 -   Remember to include the host and ip in file hosts:
     ```bash
-        sudo sh -c 'echo "<vm_ip_address> <domain>" >> /etc/hosts'
+        sudo sh -c 'echo "192.168.10.42 test.dev" >> /etc/hosts'
     ```
 
 -   In your project directory:
