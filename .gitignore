@@ -1,6 +1,7 @@
 .idea/
 .DS_Store
 nbproject
+project/.zfproject.xml
 project/data/cache/*
 project/data/logs/*
 build/

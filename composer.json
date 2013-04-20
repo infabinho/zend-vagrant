@@ -7,8 +7,6 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "phpunit/phpunit": "3.7.*@dev",
-        "phpunit/php-invoker": "dev-master",
         "zendframework/zendframework1": "1.12.*@dev"
     },
     "config": {
