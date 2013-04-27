@@ -1,7 +1,20 @@
-Exec { path => ['/usr/local/bin', '/opt/local/bin', '/usr/bin', '/usr/sbin', '/bin', '/sbin'], logoutput => true }
-Package { require => Exec['apt_update'], }
-exec {"apt_update": command => '/usr/bin/apt-get update', }
-package { 'curl': ensure => installed, require => Exec['apt_update'] }
+Exec { 
+    path => ['/usr/local/bin', '/opt/local/bin', '/usr/bin', '/usr/sbin', '/bin', '/sbin'],
+    logoutput => true 
+}
+
+Package {
+    require => Exec['apt_update'],
+}
+
+exec { "apt_update":
+    command => '/usr/bin/apt-get update', 
+}
+
+package { 'curl': 
+    ensure => installed,
+    require => Exec['apt_update'] 
+}
 
 $webserverService = $webserver ? {
     apache2 => 'httpd',
@@ -23,16 +36,18 @@ class { 'memcached':
     user => 'nobody',
     listen_address => '127.0.0.1',
     logfile => '/var/log/memcached.log',
-    extra => '',
 }
 
-class { "mysql": }
+class { "mysql": 
+}
+
 class { "mysql::server":
     config_hash => {
         "root_password" => $vhost,
         "etc_root_password" => true,
     }
 }
+
 Mysql::Db {
     require => Class['mysql::server', 'mysql::config'],
 }
