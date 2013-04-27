@@ -16,6 +16,16 @@ host { 'localhost':
     notify => Service[$webserverService],
 }
 
+class { 'memcached': 
+    memcached_port => '11211',
+    maxconn => '1024', 
+    cachesize => '64',
+    user => 'nobody',
+    listen_address => '127.0.0.1',
+    logfile => '/var/log/memcached.log',
+    extra => '',
+}
+
 class { "mysql": }
 class { "mysql::server":
     config_hash => {
@@ -31,4 +41,3 @@ include app::php
 include app::webserver
 include app::tools
 include app::database
-

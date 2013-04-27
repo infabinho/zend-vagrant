@@ -19,7 +19,6 @@ define php::fpm::pool(
   $pm_status_path = undef,
   $ping_path = undef,
   $ping_response = undef,
-  $catch_workers_output = 'no',
   $access_log = undef,
   $access_log_format = undef,
   $slowlog = undef,

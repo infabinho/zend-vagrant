@@ -12,10 +12,10 @@ class app::webserver::apache2 {
     }
 
     file {"/etc/apache2/sites-enabled/$vhost":
-        ensure => present,
+        ensure  => present,
         content => template("/vagrant/files/etc/apache2/sites-available/app.dev"),
         require => Package["httpd"],
-        notify => Service["httpd"],
+        notify  => Service["httpd"],
     }
 
     a2mod { 'rewrite': ensure => present, }

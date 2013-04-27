@@ -1,0 +1,18 @@
+# This file is managed by puppet!
+# Module: memcached
+
+-d
+
+logfile <%= logfile %>
+
+-l <%= listen_address %>
+
+-p <%= memcached_port %>
+
+-u <%= user %>
+
+-c <%= maxconn %>
+
+-m <%= cachesize %>
+
+<%= extra %>

@@ -1,37 +1,30 @@
 class app::php {
+    
+  include php
 
-    include php
+  package { ['libgv-php5', 'graphviz']:
+    ensure  => present,
+    require => Exec['apt_update'],
+  }
 
-    package { 'php5-dev':
-        ensure  => latest,
-        require => Exec['apt_update'],
-        notify  => Service[$webserverService],
-    }
+  php::module { [
+    'curl', 'gd', 'mcrypt', 'memcached', 'mysql',
+    'intl', 'imap', 'imagick', 'xdebug', 'xsl', 'geoip'
+    ]:
+    require => Class["php::install", "php::config"],
+    notify  => Service[$webserverService]
+  }
 
-    package { ['libgv-php5', 'graphviz']:
-        ensure  => latest,
-        require => Exec['apt_update'],
-    }
+  php::conf { [ 'pdo', 'pdo_mysql', 'mysqli']:
+    source => "/vagrant/files/etc/php5/fpm/conf.d/",
+    notify  => Service['php5-fpm', $webserverService],
+  }
 
-    php::module { ['curl', 'xdebug', 'mysql', 'gd', 'memcache', 'xsl', 'mcrypt', 'imagick', 'geoip', 'uuid', 'cgi']: 
-        require => Class["php::install", "php::config"],
-    }
-
-#    php::module { 'sqlite':
-#        source  => 'puppet:///files/etc/php5/fpm/conf.d/',
-#        require => Class["php::install", "php::config"],
-#    }
-#
-#    php::conf { ['pdo', 'pdo_mysql', 'mysqli']:
-#        source  => 'puppet:///files/etc/php5/fpm/conf.d/',
-#        require => Class["php::install", "php::config"],
-#    }
-#
-#    exec { 'install_composer':
-#        command => 'curl -s https://getcomposer.org/installer | php -- --install-dir="/bin"',
-#        require => [ Package['curl'], Class["php::install", "php::config"] ],
-#        unless  => 'which composer.phar',
-#    }
+   exec { 'install_composer':
+       command => 'curl -s https://getcomposer.org/installer | php -- --install-dir="/bin"',
+       require => [ Package['curl'], Class["php::install", "php::config"] ],
+       unless  => 'which composer.phar',
+   }
 #
 #    class { 'pear': require => Class['php::install'] }
 #    class { 'phpqatools': require => Class['pear'] }
@@ -52,14 +45,14 @@ class app::php {
 #    }
 #
 #    pear::package { "DocBlox":
-#        version => 'latest',
+#        version    => 'latest',
 #        repository => "pear.docblox-project.org"
 #    }
-
 
     include app::zend
 
     if 'nginx' == $webserver {
-        include app::php::fpm
+      include app::php::fpm
     }
+
 }
