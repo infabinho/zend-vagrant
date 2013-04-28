@@ -1,11 +1,11 @@
 [client]
-port    = <%= port %>
+port      = <%= port %>
 socket    = <%= socket %>
 [mysqld_safe]
 socket    = <%= socket %>
-nice    = 0
+nice      = 0
 [mysqld]
-user    = mysql
+user      = mysql
 pid-file  = <%= pidfile %>
 socket    = <%= socket %>
 port      = <%= port %>
@@ -15,7 +15,7 @@ tmpdir    = /tmp
 skip-external-locking
 
 <% if bind_address %>
-bind-address    = <%= bind_address %>
+bind-address = <%= bind_address %>
 <% end %> 
 
 key_buffer         = 16M
@@ -43,5 +43,5 @@ quote-names
 max_allowed_packet = 16M
 [mysql]
 [isamchk]
-key_buffer    = 16M
+key_buffer = 16M
 !includedir /etc/mysql/conf.d/
