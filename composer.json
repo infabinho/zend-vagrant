@@ -10,7 +10,7 @@
         "zendframework/zendframework1": "1.12.*@dev"
     },
     "config": {
-        "bin-dir": "bin",
+        "bin-dir": "project/bin",
         "process-timeout": 4000
     },
     "minimum-stability": "dev"

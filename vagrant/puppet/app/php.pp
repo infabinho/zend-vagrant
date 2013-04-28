@@ -50,16 +50,18 @@ class app::php {
 #        repository => "pear.docblox-project.org"
 #    }
 
+    include app::zend
+
     if 'nginx' == $webserver {
-      php::fpm::pool { $vhost :
-        listen       => "/run/shm/${vhost}.phpfpm.socket",
-        pm           => 'static',
-        php_settings => [
-          'php_value[memory_limit] = 600M',
-          'php_value[post_max_size] = 600M',
-          'php_value[upload_max_filesize] = 600M',
-          'php_value[max_file_uploads] = 300',
-          'php_flag[magic_quotes_gpc] = off',
+        php::fpm::pool { $vhost :
+          listen       => "/run/shm/${vhost}.phpfpm.socket",
+          pm           => 'static',
+          php_settings => [
+              'php_value[memory_limit] = 600M',
+              'php_value[post_max_size] = 600M',
+              'php_value[upload_max_filesize] = 600M',
+              'php_value[max_file_uploads] = 300',
+              'php_flag[magic_quotes_gpc] = off',
         ]
       }
     }
