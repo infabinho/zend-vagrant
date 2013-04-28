@@ -12,12 +12,12 @@ class app::php {
     'intl', 'imap', 'imagick', 'xdebug', 'xsl', 'geoip'
     ]:
     require => Class["php::install", "php::config"],
-    notify  => [Class['php::fpm::service'],Service[$webserverService]]
+    notify  => Service[$webserverService]
   }
 
   php::conf { [ 'pdo', 'pdo_mysql', 'mysqli']:
     source => "/vagrant/files/etc/php5/fpm/conf.d/",
-    notify  => [Service[$webserverService],Class['php::fpm::service']],
+    notify  => [Service[$webserverService], Class['php::fpm::service']],
   }
 
    exec { 'install_composer':
@@ -25,6 +25,7 @@ class app::php {
        require => [ Package['curl'], Class["php::install", "php::config"] ],
        unless  => 'which composer.phar',
    }
+
 #
 #    class { 'pear': require => Class['php::install'] }
 #    class { 'phpqatools': require => Class['pear'] }
@@ -48,8 +49,6 @@ class app::php {
 #        version    => 'latest',
 #        repository => "pear.docblox-project.org"
 #    }
-
-    include app::zend
 
     if 'nginx' == $webserver {
       php::fpm::pool { $vhost :
