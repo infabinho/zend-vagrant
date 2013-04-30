@@ -45,4 +45,10 @@ class app::webserver::nginx {
         require => Package["nginx"],
         notify  => Service["nginx"],
     }
+
+    file {"/srv/www/vhosts/$vhost.dev/data/logs":
+        ensure  => directory,
+        recurse => true,
+        require => Package["nginx"],
+    }
 }

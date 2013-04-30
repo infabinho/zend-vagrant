@@ -15,4 +15,13 @@ class app::zend {
         command => "/bin/bash -c 'cd /srv/www/vhosts/$vhost.dev && ./vendor/zendframework/zendframework1/bin/zf.sh enable layout'",
     }
 
+    file {["/srv/www/vhosts/$vhost.dev/data/cache",
+            "/srv/www/vhosts/$vhost.dev/data/cache/db",
+            "/srv/www/vhosts/$vhost.dev/data/cache/acl",
+            "/srv/www/vhosts/$vhost.dev/data/cache/default"]:
+        ensure  => directory,
+        recurse => true,
+        require => Package["nginx"],
+    }
+
 }
